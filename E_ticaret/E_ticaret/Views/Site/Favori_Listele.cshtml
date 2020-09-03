@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Favori_Listele";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+<h2>Favori_Listele</h2>
+
+@using E_ticaret.Models
+@model List<Favorilerim>
+<h2>Favorilerim</h2>
+
+<div class="table-responsive cart_info">
+    <table class="table table-condensed">
+        <thead>
+            <tr class="cart_menu">
+                <td class="image">Ürünler</td>
+                <td class="description">Marka/Kategori</td>
+                <td class="quantity">Fiyat</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (Favorilerim item in Model)
+            {
+                <tr>
+                    <td class="cart_product">
+                        <a href=""><img src="@item.urunler.ResimURL" alt=""></a>
+                    </td>
+                    <td class="cart_description">
+                        <h4><a href="">@item.urunler.urun_adı</a></h4>
+                        <p>Web ID: 1089772</p>
+                    </td>
+
+                    
+                    <td class="cart_total">
+                        <p class="cart_total_price">@item.urunler.fiyat TL</p>
+                    </td>
+                    <td class="cart_quantity">
+                        <div class="cart_quantity_button">
+                            @Html.ActionLink("Sil", "FavoriSil", null, new { id = item.Favori_id }, new { @class = "btn btn-dan " })
+                        </div>
+                        <div class="cart_quantity_button">
+                            @Html.ActionLink("Sepete Ekle", "SepeteEkle", null, new { id = item.UrunID }, new { @class = "btn btn-dan " })
+                        </div>
+                    </td>
+
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

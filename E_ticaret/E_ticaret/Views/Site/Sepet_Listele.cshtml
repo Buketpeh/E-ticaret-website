@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Sepet_Listele";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+@using E_ticaret.Models
+@model List<Sepet>
+<h2>Sepetim</h2>
+@ViewBag.Hata
+<div class="table-responsive cart_info">
+    <table class="table table-condensed">
+        <thead>
+            <tr class="cart_menu">
+                <td class="image">Ürünler</td>
+                <td class="description">Marka/Kategori</td>
+                <td class="price">Miktar</td>
+                <td class="quantity">Fiyat</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (Sepet item in Model)
+            {
+                <tr>
+                    <td class="cart_product">
+                        <a href=""><img src="@item.urunler.ResimURL" alt=""></a>
+                    </td>
+                    <td class="cart_description">
+                        <h4><a href="">@item.urunler.urun_adı</a></h4>
+                        <p>Web ID: 1089772</p>
+                    </td>
+
+                    <td class="cart_quantity">
+                        <div class="cart_quantity_button">
+
+                            @Html.ActionLink("+", "Arttir", null, new { id = item.ID }, new { @class = "btn btn-dan form-control" })
+                            @Html.ActionLink("-", "Azalt", null, new { id = item.ID }, new { @class = "btn btn-dan form-control" })
+                            @Html.TextBoxFor(x => item.Miktari, new { @class = "txt", data_id = item.ID })
+                            @*<input class="cart_quantity_input" type="text" name="quantity" value="@item.Miktari" autocomplete="off" size="2">*@
+
+                        </div>
+                    </td>
+                    <td class="cart_total">
+                        <p class="cart_total_price">@item.ToplamFiyati TL</p>
+                    </td>
+                    <td class="cart_quantity">
+                        <div class="cart_quantity_button">
+                            @Html.ActionLink("Sil", "SepetSil", null, new { id = item.ID }, new { @class = "btn btn-dan form-control" })
+                         </div>
+                     </td>
+
+                    <td>
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <td>
+        <p class="cart_total_price"><b>@ViewBag.Tutar</b></p>
+    </td>
+</div>
+<div class="container form-group">
+    @Html.ActionLink("Sepeti Onayla", "Satis_AdresListeleme", null, new { @class = "btn btn-success form-control" })
+
+</div>
+
+<script src="~/Content/js/jquery-1.11.1.min.js"></script>
+
+@section scripts{
+    <script>
+        $(function () {
+            $('.txt').on('change', function () {
+                var miktar = $(this).val();
+                var sepetid = $(this).attr('data-id');
+                //alert("SepetID=" + sepetid + "Miktari=" + miktar);
+                $.ajax({
+                    url: '/Site/DinamikMiktar/',
+                    data: { id: sepetid, miktari: miktar },
+                    success: function (res) {
+                        document.location.reload();
+                    }
+                });
+            }
+        });
+    </script>
+}

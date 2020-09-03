@@ -1,0 +1,13 @@
+﻿@model IEnumerable<E_ticaret.Models.kategori>
+
+@foreach (var item in Model)
+{
+
+    <span>  </span>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">@Html.ActionLink(@item.kategori_adi , "KategoriicinListe", new { id = item.kategori_id })</h4>
+        </div>
+    </div>
+}
+

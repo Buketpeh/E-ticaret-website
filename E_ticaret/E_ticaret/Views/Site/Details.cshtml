@@ -1,0 +1,69 @@
+﻿@model E_ticaret.Models.urunler
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+<div class="product-details" >
+    <!--product-details-->
+    <div class="col-sm-5">
+        <div class="view-product">
+            <img src="@Model.ResimURL" alt="">
+            <h3>ZOOM</h3>
+        </div>
+        <div id="similar-product" class="carousel slide" data-ride="carousel">
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item">
+                    <a href=""><img src="@Model.ResimURL1" alt=""></a>
+                    
+                </div>
+                <div class="item">
+                    <a href=""><img src="@Model.ResimURL2" alt=""></a>
+                    
+                </div>
+                <div class="item active">
+                    <a href=""><img src="@Model.ResimURL3" alt=""></a>
+                
+                </div>
+
+            </div>
+
+            <!-- Controls -->
+            <a class="left item-control" href="#similar-product" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="right item-control" href="#similar-product" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
+
+    </div>
+    <div class="col-sm-7">
+        <div class="product-information">
+            <!--/product-information-->
+            <img src="images/product-details/new.jpg" class="newarrival" alt="">
+            <h2>@Model.urun_adı</h2>
+            <p>@Model.kategori.kategori_adi</p>
+            <img src="images/product-details/rating.png" alt="">
+            <span>
+                <span> @Model.fiyat TL</span>
+                        <label>Miktar:</label>
+                        <input type="text" value="3">
+                        <button type="button" class="btn btn-fefault cart">
+                            @Html.ActionLink("SepeteEkle", "SepeteEkle", new { id = Model.urun_id })
+                            Sepete Ekle
+                        </button>
+                    </span>
+                    <p><b>Marka: @Model.marka.marka_adi</b></p>
+                    <p><b>Açıklama: @Model.aciklama</b> </p>
+                    @*<p><b>Brand:</b> E-SHOPPER</p>*@
+                   
+                </div><!--/product-information-->
+            </div>
+        </div>
+      <p>
+            @Html.ActionLink("Geri Dön", "S_UrunListe")
+        </p>

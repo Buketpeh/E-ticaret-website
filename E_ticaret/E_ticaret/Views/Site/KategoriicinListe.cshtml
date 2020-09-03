@@ -1,0 +1,47 @@
+﻿@model IEnumerable<E_ticaret.Models.urunler>
+
+@{
+    //ViewBag.Title = "S_UrunListele";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+    <div class="features_items">
+        <!--features_items-->
+        <h2 class="title text-center">Features Items</h2>
+
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-4">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <img src="@item.ResimURL" width="100" height="100" />
+                            @*<img src="images/shop/product11.jpg" alt="">*@
+                            <h2>@item.urun_adı</h2>
+                            <p>@item.marka</p>
+                            @Html.ActionLink("Detaylar", "Details", new { id = item.urun_id })
+              
+                        </div>
+                        <div class="product-overlay">
+                            <div class="overlay-content">
+                                <h2>@item.fiyat</h2>
+                                <p>@item.urun_adı</p>
+                                @Html.ActionLink("Detaylar", "Details", new { id = item.urun_id })
+                   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choose">
+                        <ul class="nav nav-pills nav-justified">
+                            <li><a href=""><i class="fa fa-plus-square"></i>Favorilere ekle</a></li>
+                            <li>
+                                @Html.ActionLink("SepeteEkle", "SepeteEkle", new { id = item.urun_id })
+                              
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+</div>
+      

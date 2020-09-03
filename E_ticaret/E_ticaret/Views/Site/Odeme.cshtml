@@ -1,0 +1,105 @@
+﻿@model IEnumerable<E_ticaret.Models.kredi_karti>
+
+@{
+    ViewBag.Title = "Odeme";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+<h2>Odeme Sayfası</h2>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Kredi Kartı Ekle
+</button>
+
+
+<table class="table table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.kart_no)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.son_kullanma_tarih)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cvv)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.kart_no)
+
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.son_kullanma_tarih)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.cvv)
+    </td>
+    <td>
+        @using (Html.BeginForm("Kart_Bilgileri_Girme", "Site", FormMethod.Post))
+        {
+            <input type="text" name="KartID" id="KartID" value="@item.kart_id" hidden="hidden" />
+            <input type="text" name="AdresID" id="AdresId" value="@ViewBag.AdresTut" hidden="hidden" />
+        <td> @Html.ActionLink("Odeme Yap", "Kart_Bilgileri_Girme", new { KartID = item.kart_id }) </td>
+        @*<td> @Html.ActionLink("Sil", "Delete", new { KartID = item.kart_id }) </td>*@
+        @*<input type="submit" name="KartID" value="Ödeme Yap" />*@
+
+    }
+        </td>
+
+    </tr>
+        }
+
+</table>
+<p class="alert ">@ViewBag.Hata</p>
+        
+ 
+
+
+
+@using (Html.BeginForm("KrediKartiKaydet", "Site", FormMethod.Post))
+{
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Kredi Kartı Ekle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <input type="text" name="AdresID" id="AdresID" value="@ViewBag.AdresTut" hidden="hidden" />
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Kart No</label>
+                            <input type="text" name="KartNo" id="KartNo" placeholder="Kart No" value="" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Son Kullanma Tarihi</label>
+                            <input type="text" name="SonKulTarih" id="SonKulTarih" placeholder="Son Kullanma Tarihi" value="" class="form-control" />
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>C.V.V</label>
+                            <input type="text" name="Cvv" id="Cvv" placeholder="CVV" value="" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

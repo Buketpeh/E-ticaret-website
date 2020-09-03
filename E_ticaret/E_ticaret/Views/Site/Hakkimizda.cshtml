@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Hakkimizda";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+@using E_ticaret.Models
+@model List<Hakkimizda>
+ 
+@foreach (Hakkimizda item in Model)
+{
+<h2  class="title text-center" >@item.Baslik</h2>
+    <div class="cnt" data-prop="text">
+        <p>
+            <span>
+                @item.Aciklama
+            </span>
+        </p>
+
+    </div>                  
+}
